@@ -1,4 +1,4 @@
-package com.negocio.ReservasYCitas.Service;
+package com.negocio.ReservasYCitas.Service.Controller;
 
 import org.springframework.stereotype.Repository;
 

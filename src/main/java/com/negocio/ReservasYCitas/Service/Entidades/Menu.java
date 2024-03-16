@@ -1,13 +1,6 @@
-package com.negocio.ReservasYCitas.Modelo;
+package com.negocio.ReservasYCitas.Service.Entidades;
 
-import com.negocio.ReservasYCitas.Service.CitaService;
-import com.negocio.ReservasYCitas.Service.FranjaHorariaService;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Scanner;
-
-
+/*
 public class Menu {
 
 
@@ -80,3 +73,4 @@ public class Menu {
         }
     }
 }
+*/

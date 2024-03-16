@@ -1,4 +1,4 @@
-package com.negocio.ReservasYCitas.Modelo;
+package com.negocio.ReservasYCitas.Service.Entidades;
 
 import lombok.*;
 

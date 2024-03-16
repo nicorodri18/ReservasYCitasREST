@@ -1,8 +1,8 @@
-package com.negocio.ReservasYCitas.Service;
+package com.negocio.ReservasYCitas.Service.Controller;
 
-import com.negocio.ReservasYCitas.Modelo.Estilista;
-import com.negocio.ReservasYCitas.Modelo.Servicio;
-import com.negocio.ReservasYCitas.Modelo.Cita;
+import com.negocio.ReservasYCitas.Service.Entidades.Estilista;
+import com.negocio.ReservasYCitas.Service.Entidades.Servicio;
+import com.negocio.ReservasYCitas.Service.Entidades.Cita;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
