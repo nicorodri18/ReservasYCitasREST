@@ -13,18 +13,19 @@ import java.util.List;
 @RestController
 public class CitaController {
     private CitaRepository repository;
+    private CitaService service;
 
     public CitaController(CitaRepository citaRepository){
         this.repository= repository;
     }
     @PostMapping("/cita")
-    public String reservarCita(@RequestBody Cita cita){
-        repository.save(cita);
+    public String reservarCita(@RequestBody int servicio, int estilista, LocalDateTime fecha){
+        service.crearCita(servicio,estilista,fecha);
         return "Cita Agendada";
     }
     @GetMapping("/cita/{id}")
     public Cita buscarCitaPorId(@PathVariable Integer id){
-        return repository.findById(id).orElse(null);
+        return service.buscarCita(id);
     }
 
     @GetMapping("/citas/{id}")
@@ -41,7 +42,7 @@ public class CitaController {
         return new Response<> (null,"Cita Cancelada");
     }
     @PutMapping("/cita/{id}")
-    public Response<Cita> reprogramarCita(@RequestBody Integer id, LocalDateTime date){
+    public Response<Cita> repogramarCita(@RequestBody Integer id, LocalDateTime date){
         Cita actualizar;
         actualizar=repository.findById(id).orElse(null);
         if (actualizar!=null){
@@ -50,4 +51,5 @@ public class CitaController {
         }
         return  new Response<>(repository.findById(id).orElse(null),"");
     }
+
 }

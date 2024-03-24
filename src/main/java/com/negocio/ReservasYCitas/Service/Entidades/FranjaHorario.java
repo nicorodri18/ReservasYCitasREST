@@ -9,5 +9,4 @@ import java.time.LocalDateTime;
 public class FranjaHorario {
     private LocalDateTime inicio;
     private LocalDateTime fin;
-    // Constructor, getters y setters
 }

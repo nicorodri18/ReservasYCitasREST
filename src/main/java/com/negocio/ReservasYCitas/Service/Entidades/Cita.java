@@ -5,24 +5,15 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Table(name="citas")
 @Entity
 @Data
 public class Cita {
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
-    private Servicio servicio;
-    @Column(name = "estilista")
-    @OneToOne
-    @JoinColumn(name="nombre")
-    private Estilista estilista;
-    @Column
+    private int servicio;
+    private int estilista;
     private LocalDateTime fechaHora;
 
-    public LocalDateTime getFechaHora() {
-        return fechaHora;
-    }
 
 }
