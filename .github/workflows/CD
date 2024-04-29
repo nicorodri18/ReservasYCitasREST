@@ -1,0 +1,33 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v2
+      - name: Configuración de Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+      - name: Configuración de Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Compilación del proyecto
+        run: ./gradlew build
+      - name: Empaquetado del proyecto
+        run: ./gradlew assemble
+      - name: Despliegue en servidor de pruebas
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd /ruta/del/proyecto
+            mv build/libs/tu-proyecto.jar /ruta/del/servidor/despliegue
