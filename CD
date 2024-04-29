@@ -1,0 +1,53 @@
+
+name: Continuous Deployment
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v2
+
+      - name: Configurando Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+
+      - name: Configurando Gradle
+        run: ./gradlew build
+
+      - name: Empaquetando proyecto
+        run: ./gradlew assemble
+
+      - name: Subiendo artefacto de despliegue
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact
+          path: build/libs/tu-proyecto.jar
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargando artefacto de despliegue
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact
+          path: build/libs/
+
+      - name: Desplegando en servidor de pruebas
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd /ruta/del/proyecto
+            mv build/libs/tu-proyecto.jar /ruta/del/servidor/despliegue
